@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authnTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="jumbotron">
+            <h1>Customer Welcome</h1>
+            <p>Hello customer #{loginController.remoteUser}</p>
+            <a class="btn btn-lg btn-primary" href="#about" role="button">View more about WordsWorth</a>
+            <h:form>
+                <h:commandButton class="btn btn-lg btn-primary"  action="#{customerPortalController.doCreateOrder(i)}" value="Place order "/>
+
+            </h:form>
+        </div>   
+        <h2>Customer Details</h2>
+        <h:dataTable class="table table-striped" value="#{customerService.findByUsername(loginController.remoteUser)}" var="customer">
+            <h:column>
+                <f:facet name="header" >
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{customer.id}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="FirstName"/>
+                </f:facet>
+                <h:outputText value="#{customer.firstname}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="LastName"/>
+                </f:facet>
+                <h:outputText value="#{customer.lastname}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ContactNo"/>
+                </f:facet>
+                <h:outputText value="#{customer.contactno}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Address"/>
+                </f:facet>
+                <h:outputText value="#{customer.address}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="EmailId"/>
+                </f:facet>
+                <h:outputText value="#{customer.email}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Username"/>
+                </f:facet>
+                <h:outputText value="#{customer.user.userName}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Orders placed"/>
+                </f:facet>
+                <h:outputText value="#{customer.ordertable.size()}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Registered Date"/>
+                </f:facet>
+                <h:outputText value="#{customer.registeredDate}">
+                    <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                </h:outputText>
+            </h:column>
+
+
+
+        </h:dataTable>
+        <h2>Orders</h2>
+        <h:dataTable class="table table-striped "  value="#{customerPortalController.customer.ordertable}" var="ordertable">
+            <h:column>
+                <f:facet name="header" >
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.id}"></h:outputText>
+
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Order Date"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.orderdate}">
+                    <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Product"/>
+                </f:facet>
+                <h:outputText value="#{customerPortalController.getOrderProductForPage(ordertable)}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Total Price in $"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.totalprice}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header" >
+                    <h:outputText value="Total Price in INR"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.totalprice}">
+                    <f:converter converterId="rupeeConverter">
+                    </f:converter>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Click"/>
+                </f:facet>
+                <h:form>
+                    <h:commandLink action="#{customerPortalController.doViewOrder(ordertable)}" value="View "/>
+                    <h:commandLink action="#{customerPortalController.doUpdateOrder(ordertable)}" value="Update "/>
+                    <h:commandLink action="#{customerPortalController.doDeleteOrder(ordertable)}" value="Delete "/>
+                </h:form>
+            </h:column>
+
+
+
+
+        </h:dataTable>
+        <section class="bg-primary" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <h2 class="section-heading">We've got what you need!</h2>
+                        <h3 class="light"></h3>
+                        <p class="text-faded">At WordsWorth, every type of reader can satisfy one-of-a-kind book cravings.So look around and let WordsWorth help you find your 
+                            next favorite book.</p>
+                        <h:form>
+                            <h:commandButton class="btn btn-lg btn-primary"  action="#{customerPortalController.doCreateOrder(i)}" value="Get Started"/>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ui:define>
+
+
+</ui:composition>

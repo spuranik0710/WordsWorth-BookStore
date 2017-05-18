@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/authnTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <h:body > 
+            <div class="wrapper">
+                <div class="jumbotron">
+                    <h1>Welcome to the WordsWorth Book Store #{loginController.remoteUser}</h1>
+                    <p>At WordsWorth, every type of reader can satisfy one-of-a-kind book cravings. 
+                        Whether your personal passions lean toward new releases by the hottest authors 
+                        or classics from the old masters, you will find it on WordsWorth. We have the biggest 
+                        bestsellers to the hardest-to-find, out-of-print rarities brought to you by thousands 
+                        of Booksellers around the world. WordsWorth is where your page-turning prayers will be 
+                        answered at amazingly low prices. So look around and let WordsWorth help you find your 
+                        next favorite book.</p>
+                    <a class="btn btn-lg btn-primary" href="#about" role="button">View more about WordsWorth. </a>
+
+                </div>
+                <section class="bg-primary jumbotron" id="about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <h2 class="section-heading">We've got what you need!</h2>
+                                <h3 class="light"></h3>
+                                <p class="text-faded">At WordsWorth, every type of reader can satisfy one-of-a-kind book cravings.So look around and let WordsWorth help you find your 
+                                    next favorite book.</p>
+                                <h:form>
+                                    <h:commandButton class="btn btn-lg btn-primary"  action="#{customerPortalController.doCreateOrder(i)}" value="Get Started"/>
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </h:body> 
+
+    </ui:define>
+
+
+
+
+</ui:composition>

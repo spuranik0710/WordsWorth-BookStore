@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/publicTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+
+    </ui:define>
+
+    <ui:define name="content" class="back">
+        <h2>Login Page</h2>
+        <h:body>
+
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Online Book Store</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+
+                            <li>
+                                <h:link value="About"/>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Books</a></li>
+                                    <li><a href="#">Magazines</a></li>
+                                    <li><a href="#">News Paper</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+            <a id="javadoc" href="/spuranik-fp/JavaDoc/apidocs/index.html" >JavaDoc</a>
+            <h:form class="form-signin">
+                <h1>User Login</h1>
+                <h:panelGroup styleClass="#{j_username.valid ? 'form-group' : 'form-group has-error'}" layout="block" >
+                    <h:outputLabel class="control-label" for="j_username" value="Username"/>
+                    <h:inputText binding="#{j_username}" class="form-control" id="j_username" value="#{loginController.username}"/>
+                    <h:message for="j_username" style="color:red"/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="#{j_username.valid ? 'form-group' : 'form-group has-error'}">
+                    <h:outputLabel class="control-label" for="j_password" value="Password"/>
+                    <h:inputSecret binding="#{j_password}" class="form-control" id="j_password" value="#{loginController.password}" />
+                    <h:message for="j_password" style="color:red"/>
+                </h:panelGroup>
+
+                <h:commandButton class="btn btn-default btn-lg btn-primary btn-block" value="Login" action="#{loginController.doLogin()}"/>
+                <h:link class="btn btn-default btn-lg btn-primary btn-block" value="Signup as Customer" outcome="/signup.xhtml"/>
+            </h:form>
+
+        </h:body>
+    </ui:define>
+
+</ui:composition>

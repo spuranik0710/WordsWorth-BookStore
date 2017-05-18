@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authnTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="jumbotron">
+            <h1>Employee Welcome</h1>
+            <p>Hello employee #{loginController.remoteUser}</p>
+            <a class="btn btn-lg btn-primary" href="#" role="button">View more about WordsWorth</a>
+            <h:form>
+                <h:commandButton class="btn btn-lg btn-primary" action="#{employeePortalController.taketoProduct()}" value="Products"/>
+            </h:form>
+
+        </div>
+
+        <h2>Employee Details</h2>
+        <h:dataTable class="table table-striped table-bordered table-hover" value="#{employeeService.findByUsername(loginController.remoteUser)}" var="employee">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{employee.id}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="FirstName"/>
+                </f:facet>
+                <h:outputText value="#{employee.firstname}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="LastName"/>
+                </f:facet>
+                <h:outputText value="#{employee.lastname}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="ContactNo"/>
+                </f:facet>
+                <h:outputText value="#{employee.contactno}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Address"/>
+                </f:facet>
+                <h:outputText value="#{employee.address}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="EmailId"/>
+                </f:facet>
+                <h:outputText value="#{employee.email}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Username"/>
+                </f:facet>
+                <h:outputText value="#{employee.user.userName}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Registered Date"/>
+                </f:facet>
+                <h:outputText value="#{employee.registeredDate}">
+                    <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                </h:outputText>
+            </h:column>
+        </h:dataTable>
+        <h2>Orders</h2>
+        <h:dataTable class="table table-hover table-bordered " value="#{employeePortalController.getallOrders()}" var="ordertable">
+            <h:column>
+                <f:facet name="header" >
+                    <h:outputText value="ID"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.id}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Customer Name"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.getCustomer().getFirstname()}"></h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Total Price in $"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.totalprice}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header" >
+                    <h:outputText value="Total Price in INR"/>
+                </f:facet>
+                <h:outputText value="#{ordertable.totalprice}">
+                    <f:converter converterId="rupeeConverter">
+                    </f:converter>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Click"/>
+                </f:facet>
+                <h:form>
+                    <h:commandLink action="#{employeePortalController.doViewOrder(ordertable)}" value="View "/>
+                    <h:commandLink action="#{employeePortalController.doReviewOrder(ordertable)}" value="Update "/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+
+</ui:composition>

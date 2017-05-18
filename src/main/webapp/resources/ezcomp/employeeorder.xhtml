@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+
+    <cc:interface>
+        <cc:attribute name="order" required="true" type="edu.iit.sat.itmd4515.spuranik.domain.OrderTable"/>
+        <cc:attribute name="readonly" type="java.lang.Boolean" default="true" required="false"/>
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <div class="viewdiv">
+                <h:panelGroup layout="block" class="form-group oid">
+                    <h:outputLabel for="orderId" value="Order ID #{cc.attrs.order.id}"/>
+                    <h:inputHidden class="form-control" id="orderId" value="#{cc.attrs.order.id}"/>
+                    <h:message for="orderId" style="color:red"/>
+                </h:panelGroup>
+                <br></br>
+                <h:panelGroup layout="block" class="form-group mob">
+                    <h:outputLabel for="orderAddress" value="Address #{cc.attrs.order.address}" />
+                    <h:inputHidden class="form-control" id="orderAddress" value="#{cc.attrs.order.address}"/>
+                    <h:message for="orderAddress" style="color:red"/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="form-group mob">
+                    <h:outputLabel for="mobileNumber" value="Mobile Number #{cc.attrs.order.mobilenumber}"/>
+                    <h:inputHidden class="form-control" id="mobileNumber" value="#{cc.attrs.order.mobilenumber}"/>
+                    <h:message for="mobileNumber" style="color:red"/>
+                </h:panelGroup>
+
+                <h:panelGroup layout="block" class="form-group or">
+                    <h:outputLabel for="totalPrice" value="Total Price #{cc.attrs.order.totalprice}"/>
+
+                    <h:inputHidden class="form-control" id="totalPrice" value="#{cc.attrs.order.totalprice}"/>
+                    <h:message for="totalPrice" style="color:red"/>
+                </h:panelGroup>
+
+                <h:dataTable class="table table-hover table-bordered " value="#{cc.attrs.order.orderdetails}" var="orderdetails">
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Product"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.product.productname}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Category"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.product.categoryname}"></h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Quantity"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.quantity}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Price in $"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.productprice}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Price in INR"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.productprice}">
+                            <f:converter converterId="rupeeConverter">
+                            </f:converter>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Total in $"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.total}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header" >
+                            <h:outputText value="Total in INR"/>
+                        </f:facet>
+                        <h:outputText value="#{orderdetails.total}">
+                            <f:converter converterId="rupeeConverter">
+                            </f:converter>
+                        </h:outputText>
+                    </h:column>
+
+                </h:dataTable>
+
+            </div>
+            <br></br>
+            <h:panelGroup layout="block" class="form-group add">
+                <h:outputLabel for="orderShippingdetails" value="Shipping Details"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="orderShippingdetails" 
+                    value="#{cc.attrs.order.orderreview.shippingdetails}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}"/>
+                <h:message for="orderShippingdetails" style="color:red"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group add">
+                <h:outputLabel for="orderShippingDate" value="Shipping Date (YYYY-MM-DD)"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="orderShippingdate" 
+                    value="#{cc.attrs.order.orderreview.deliverydate}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
+                <h:message for="orderShippingDate" style="color:red"/>
+            </h:panelGroup>
+            <h:commandButton 
+                rendered="#{not cc.attrs.readonly}"
+                class="btn btn-lg btn-primary" 
+                action="#{cc.attrs.action}" 
+                value="Save"/>
+        </h:form>
+    </cc:implementation>
+</html>

@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+    <link href="style.css" rel="stylesheet"></link>
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+        <style>
+            body{
+                font-family: Merriweather,'Helvetica Neue',Arial,serif;
+                background-image: url('header.jpg');
+            }
+            .plabel{
+                font-family: serif;
+                font-size: 20px;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .navbar{
+                background-color: #F05F40;
+                color: white;
+                font-weight: 800;
+            }
+            .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+                border-color: #101010;
+                color: white;
+
+            }
+            .form-group{
+                color: #fff; 
+                font-family: serif;
+
+            }
+            .oid{
+                width: 576px;
+                margin: auto;
+                font-size: 20px;
+                display: inline-block;
+
+            }
+            .mob{
+                width: 576px;
+                margin: auto;
+                font-size: 20px;
+                display: inline-block;
+                float: left;
+
+            }
+            .viewdiv{
+                padding: 0px 67px;
+            }
+            .tp{
+                width: 576px;
+                margin: auto;
+                font-size: 20px;
+
+            }.tpri{
+                display: inline;
+                margin-left: 299px;
+                width: 500px;
+                font-size: 20px;
+            }
+            .or{
+                display: inline;
+                width: 579px;
+                margin: auto;
+                font-size: 20px;
+
+            }
+            .ori{
+
+                display: inline;
+                width: 579px;
+                margin: auto;
+                font-size: 20px;
+            }
+            a{
+                color: #0e69b7;
+
+            }
+            .bg-primary {
+                color: #fff;
+                background-color: #F05F40;
+            }
+            .add{
+                font-size: 20px;
+                clear: both;
+                margin: 10px 40px 40px 40px;
+            }
+            .aboutitem{
+                display: inline;
+                color: white;
+                font-family: serif;
+                font-size: 14px;
+                text-align: center;
+            }
+            .addcart{
+                color: #F05F40;
+                font-family: serif;
+                font-size: 20px;
+                margin-left: 15px;
+            }
+            .rwd-table{
+                background: #34495E;
+                color: #fff;
+                border-radius: .4em;
+                overflow: hidden;
+                min-width: 300px;
+            }
+            .btn{
+                margin-top: 10px;
+                font-family: serif; 
+            }
+            .thumbnail{
+                float: left;
+                width: 500px;
+                margin-left: 30px;
+                display: inline-block;
+                background-color: #F05F40;
+            }
+            .jumbotron{
+                background-color: #F05F40;
+
+                font-family: serif;
+                color: white;
+            }
+            td{
+                background-color: #dddddd;
+                font-family: serif;
+                font-size: 18px;
+            }
+            thead{
+                background-color: #F05F40;
+                color: #fff;
+                font-family: serif;
+                font-size: 18px;
+            }
+            h2{
+                color: #fff;
+                font-family: serif;
+                margin: 27px;
+                text-align: center;
+            }
+            .quan{
+                margin-left: 214px;
+                width: 59px;
+                color: black;
+            }
+
+
+        </style>
+
+
+    </h:head>
+    <h:body >
+
+        <h:panelGroup layout="block" class="container">
+            <!-- Static navbar -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Online Book Store</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="#{fn:startsWith(view.viewId, '/welcome') ? 'active' : ''}">
+                                <h:link outcome="/welcome.xhtml" value="Home"/>
+                            </li>
+
+                            <ui:fragment rendered="#{loginController.admin}">
+                                <li class="#{fn:startsWith(view.viewId, '/admin/welcome') ? 'active' : ''}">
+                                    <h:link outcome="/admin/welcome.xhtml" value="Admin Portal"/>
+                                </li>
+                                <li class="#{fn:startsWith(view.viewId, '/admin/allOrders') ? 'active' : ''}">
+                                    <h:link outcome="/admin/allOrders.xhtml" value="Orders"/>
+                                </li>
+                                <li class="#{fn:startsWith(view.viewId, '/admin/product') ? 'active' : ''}">
+                                    <h:link outcome="/admin/product.xhtml" value="Products"/>
+                                </li>
+
+                            </ui:fragment>
+                            <ui:fragment rendered="#{loginController.customer}">
+                                <li class="#{fn:startsWith(view.viewId, '/customer/welcome') ? 'active' : ''}">
+                                    <h:link outcome="/customer/welcome.xhtml" value="Customer Portal"/>
+                                </li>
+                                <li class="#{fn:startsWith(view.viewId, '/customer/createOrder') ? 'active' : ''}">
+                                    <h:link outcome="/customer/createOrder.xhtml" value="Place Order"/>
+                                </li>
+
+
+                            </ui:fragment>
+                            <ui:fragment rendered="#{loginController.employee}">
+                                <li class="#{fn:startsWith(view.viewId, '/employee/welcome') ? 'active' : ''}">
+                                    <h:link outcome="/employee/welcome.xhtml" value="Employee Portal"/>
+                                </li>
+                                <li class="#{fn:startsWith(view.viewId, '/employee/product') ? 'active' : ''}">
+                                    <h:link outcome="/employee/product.xhtml" value="Products"/>
+                                </li>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{loginController.customer}">
+                                <li class="#{fn:startsWith(view.viewId, '/customer/about') ? 'active' : ''}">
+                                    <h:link outcome="/welcome.xhtml" value="About"/>
+                                </li>
+                            </ui:fragment>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Books</a></li>
+                                    <li><a href="#">Magazines</a></li>
+                                    <li><a href="#">News Paper</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:form><h:commandLink class="navbar-text" action="#{loginController.doLogout()}" value="Logout"/> </h:form></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+
+            <h:panelGroup rendered="#{not facesContext.validationFailed and not empty facesContext.messageList}" layout="block" class="alert alert-warning alert-dismissible">
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h:messages showDetail="true" showSummary="true" globalOnly="true"/>
+
+
+            </h:panelGroup>
+
+            <h1><ui:insert name="title">Default Title</ui:insert></h1>
+
+            <ui:insert name="content">Default Content</ui:insert>
+
+        </h:panelGroup>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
+
